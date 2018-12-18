@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通用页头页脚</title>
+</head>
+<body>
+    <!-- 页头 -->
+    <div class="headerpage"></div>
+    <!-- 页头 end -->
+    <!-- 中部主体 -->
+    中部主体
+    <!-- 中部主体 end -->
+    <!-- 页脚 -->
+    <div class="footerpage"></div>
+    <!-- 页脚 end-->
+    <script src="../common/js/jquery-3.0.0.min.js"></script>
+    <script>
+        $(function(){
+            $(".headerpage").load('header.html')
+            $(".footerpage").load('footer.html')
+        })
+    </script>
+</body>
+</html>
