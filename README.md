@@ -3,4 +3,5 @@
 # 通用页头和页脚
 - generic_header_footer    
 # 图片懒加载
-- lazy_images_loading    
+- lazy_images_loading
+# canvas二维码

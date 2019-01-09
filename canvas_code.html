@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas二维码</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <div id="finally"></div>
+</body>
+<script src="./common/js/jquery-3.0.0.min.js"></script>
+<script src="./common/js/qrcode.min.js"></script>
+<script>
+    //合并大图片
+    var data_codeImg = '<{$qrcode}>',
+        data = [
+            './common/images/bgs/bg6.jpg',
+            './common/images/bgs/bg6.jpg'
+        ],
+        base64 = [];
+    function draw(fn) {
+        var c = document.createElement('canvas'), // 获取canvas对象( 通过选择器选择canvas元素 )
+            ctx = c.getContext('2d'), // 通过canvas获取他的上下文绘制环境( context )
+            len = data.length;
+        c.width = 750; // 画布宽   canvas的默认宽度与高度:宽度:300,高度:150 注：canvas的宽度与高度，只能通过行间属性或者js动态修改，不要通过样式去修改，否则获取到的宽度与高度不准
+        c.height = 1262; // 画布高
+        ctx.rect(0, 0, c.width, c.height); // 创建矩形 参数：绘制起点x坐标，绘制起点y坐标，矩形宽（像素），矩形高（像素）
+        ctx.fillStyle = '#fff';
+        ctx.fill();
+
+        function drawing(n) {
+            if (n < len) {
+                var img = new Image;
+                img.src = data[n];
+                img.onload = function () {
+                    if (n === 1) {
+                        // 画图 参数：图片对象，相对画布的起点x坐标，
+                        // 相对画布的起点y坐标，绘制的图片宽度（二维码，px），绘制的图片高度（二维码，px）
+                        ctx.drawImage(img, c.width / 1.56, 920, 240, 240);
+                    } else if (n === 0) {
+                        ctx.drawImage(img, 0, 0, c.width, c.height);
+                    }
+                    drawing(n + 1); //递归
+                }
+            } else {
+                //保存生成作品图片
+                base64.push(c.toDataURL("image/jpeg", 0.8));
+                fn();
+            }
+        }
+        drawing(0);
+    }
+    //        调用
+    function hecheng() {
+        draw(function () {
+            document.getElementById('finally').innerHTML = '<img src="' + base64[0] + '">';
+        });
+    }
+    hecheng()
+</script>
+
+</html>
