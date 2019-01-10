@@ -5,3 +5,5 @@
 # 图片懒加载
 - lazy_images_loading
 # canvas二维码
+- canvas_code
+- canvas_code2
